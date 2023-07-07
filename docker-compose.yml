@@ -1,0 +1,35 @@
+version: "3"
+services:
+  client:
+    image: frontend:2
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - test-app
+
+  server:
+    image: backend:1
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - test-app
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - test-app
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  test-app:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
