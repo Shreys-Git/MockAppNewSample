@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export const ItemSelector = () => {
   const [product, setProduct] = useState("");
   const [savedId, setSavedId] = useState("");
+  const [envVar, setEnvVar] = useState("");
 
   const fetchProducts = async () => {
     try {
@@ -16,9 +17,10 @@ export const ItemSelector = () => {
   };
 
   const saveProduct = async () => {
+    setEnvVar(process.env.REACT_APP_BACKEND_URL);
     const payload = { product };
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(process.env.REACT_APP_BACKEND_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,6 +45,8 @@ export const ItemSelector = () => {
       <br></br>
       <br></br>
       {savedId}
+      <br></br>
+      {envVar}
     </>
   );
 };
