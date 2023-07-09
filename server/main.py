@@ -41,6 +41,9 @@ import os
 
 app = FastAPI()
 
+DB_URL = os.getenv("DB_URL")
+ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -48,8 +51,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-DB_URL = os.getenv("DB_URL")
 
 
 client = MongoClient(DB_URL)
