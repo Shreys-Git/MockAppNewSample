@@ -42,11 +42,10 @@ import os
 app = FastAPI()
 
 DB_URL = os.getenv("DB_URL")
-ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[ALLOWED_ORIGIN],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
